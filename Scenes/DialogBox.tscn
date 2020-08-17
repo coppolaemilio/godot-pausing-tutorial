@@ -1,0 +1,78 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://Scenes/DialogBox.gd" type="Script" id=1]
+[ext_resource path="res://Fonts/Overlock/Overlock.tres" type="DynamicFont" id=2]
+[ext_resource path="res://Images/next-indicator.png" type="Texture" id=3]
+[ext_resource path="res://Images/dialog-background.png" type="Texture" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "IDLE"
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.5 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 728.953, 135.862 ), Vector2( 728.953, 145.226 ) ]
+}
+
+[node name="DialogBox" type="Control"]
+pause_mode = 2
+anchor_left = 0.483
+anchor_top = 1.0
+anchor_right = 0.483
+anchor_bottom = 1.0
+margin_left = -387.592
+margin_top = -231.0
+margin_right = 390.408
+margin_bottom = -50.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_group_": true,
+"_edit_use_anchors_": false
+}
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color( 0.52549, 0.52549, 0.52549, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+texture = ExtResource( 4 )
+expand = true
+stretch_mode = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 15.0
+margin_top = 15.0
+margin_right = -15.0
+margin_bottom = -15.0
+custom_fonts/normal_font = ExtResource( 2 )
+custom_colors/default_color = Color( 1, 1, 1, 1 )
+bbcode_enabled = true
+bbcode_text = "Hello there people from Youtube, This dialog is a placeholder. Hello world this is a long dialog? "
+text = "Hello there people from Youtube, This dialog is a placeholder. Hello world this is a long dialog? "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="next-indicator" type="Sprite" parent="."]
+visible = false
+position = Vector2( 728.953, 135.984 )
+scale = Vector2( 0.541, 0.511 )
+texture = ExtResource( 3 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="next-indicator"]
+autoplay = "IDLE"
+anims/IDLE = SubResource( 1 )
+
+[node name="Tween" type="Tween" parent="."]
+[connection signal="tween_completed" from="Tween" to="." method="_on_Tween_tween_completed"]
